@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Trip Planner - Project Overview</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #C9A84C;
+            --primary-dark: #a88a3d;
+            --bg-dark: #0d0d0c;
+            --bg-card: #1a1a18;
+            --bg-card-hover: #22221e;
+            --text: #f5f5f5;
+            --text-muted: #888880;
+            --border: #333330;
+            --success: #4ade80;
+            --warning: #fbbf24;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, #e8d5a3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--bg-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        /* Architecture Section */
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Flow Diagram */
+        .flow-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 40px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding: 24px;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            min-width: 160px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .flow-step:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        .flow-icon {
+            font-size: 2.5rem;
+        }
+
+        .flow-label {
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .flow-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* Tech Stack Grid */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .tech-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tech-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .tech-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .tech-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .tech-purpose {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Data Sources */
+        .datasets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .dataset-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .dataset-card:hover {
+            border-color: var(--primary);
+        }
+
+        .dataset-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .dataset-info h3 {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .dataset-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .dataset-count {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--bg-dark);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+        }
+
+        .feature-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .feature-item .check {
+            color: var(--success);
+        }
+
+        /* API Flow */
+        .api-flow {
+            display: flex;
+            align-items: stretch;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            flex-wrap: wrap;
+        }
+
+        .api-step {
+            flex: 1;
+            min-width: 150px;
+            padding: 24px;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .api-step:last-child {
+            border-right: none;
+        }
+
+        .api-number {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            color: var(--bg-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .api-title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .api-detail {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .flow-container {
+                flex-direction: column;
+            }
+            
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>✈️ AI Trip Planner</h1>
+            <p class="subtitle">Hybrid AI-Powered Travel Planning System</p>
+            <span class="badge">Vignan University · B.Tech CSE · Final Year Project</span>
+        </header>
+
+        <!-- Architecture Flow -->
+        <section class="section">
+            <h2 class="section-title">How It Works</h2>
+            <div class="flow-container">
+                <div class="flow-step">
+                    <span class="flow-icon">📝</span>
+                    <span class="flow-label">User Input</span>
+                    <span class="flow-desc">Destination, Duration, Budget, Companions</span>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <span class="flow-icon">🤖</span>
+                    <span class="flow-label">ML Model</span>
+                    <span class="flow-desc">Real Hotels, Restaurants, Attractions</span>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <span class="flow-icon">✨</span>
+                    <span class="flow-label">Gemini AI</span>
+                    <span class="flow-desc">Generates Day-by-Day Itinerary</span>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <span class="flow-icon">📱</span>
+                    <span class="flow-label">User Gets</span>
+                    <span class="flow-desc">Complete Trip Plan + Recommendations</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="section">
+            <h2 class="section-title">Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">⚛️</div>
+                    <div class="tech-name">React 19</div>
+                    <div class="tech-purpose">Frontend UI</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🚀</div>
+                    <div class="tech-name">Vite 7</div>
+                    <div class="tech-purpose">Build Tool</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🟢</div>
+                    <div class="tech-name">Node.js</div>
+                    <div class="tech-purpose">Express Backend</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🐍</div>
+                    <div class="tech-name">Python</div>
+                    <div class="tech-purpose">Flask ML API</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🧠</div>
+                    <div class="tech-name">XGBoost</div>
+                    <div class="tech-purpose">ML Model</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">✨</div>
+                    <div class="tech-name">Gemini AI</div>
+                    <div class="tech-purpose">Itinerary Generation</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🗄️</div>
+                    <div class="tech-name">Supabase</div>
+                    <div class="tech-purpose">Auth + Database</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">📄</div>
+                    <div class="tech-name">jsPDF</div>
+                    <div class="tech-purpose">PDF Export</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Sources -->
+        <section class="section">
+            <h2 class="section-title">Real-World Data Sources</h2>
+            <div class="datasets-grid">
+                <div class="dataset-card">
+                    <span class="dataset-icon">🏨</span>
+                    <div class="dataset-info">
+                        <h3>TBO Hotels <span class="dataset-count">1M+</span></h3>
+                        <p>Hotel recommendations by city & budget</p>
+                    </div>
+                </div>
+                <div class="dataset-card">
+                    <span class="dataset-icon">🍽️</span>
+                    <div class="dataset-info">
+                        <h3>Zomato <span class="dataset-count">123K</span></h3>
+                        <p>Restaurant data across 17 Indian cities</p>
+                    </div>
+                </div>
+                <div class="dataset-card">
+                    <span class="dataset-icon">🎯</span>
+                    <div class="dataset-info">
+                        <h3>Tourist Places <span class="dataset-count">325</span></h3>
+                        <p>Verified attractions with ratings</p>
+                    </div>
+                </div>
+                <div class="dataset-card">
+                    <span class="dataset-icon">📊</span>
+                    <div class="dataset-info">
+                        <h3>Cultural Tourism <span class="dataset-count">5K</span></h3>
+                        <p>Satisfaction scores dataset</p>
+                    </div>
+                </div>
+                <div class="dataset-card">
+                    <span class="dataset-icon">🚂</span>
+                    <div class="dataset-info">
+                        <h3>Indian Railways <span class="dataset-count">9K</span></h3>
+                        <p>Station & train data</p>
+                    </div>
+                </div>
+                <div class="dataset-card">
+                    <span class="dataset-icon">📈</span>
+                    <div class="dataset-info">
+                        <h3>Tourism Stats</h3>
+                        <p>State-wise visitor statistics</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- API Flow -->
+        <section class="section">
+            <h2 class="section-title">Request Flow</h2>
+            <div class="api-flow">
+                <div class="api-step">
+                    <div class="api-number">1</div>
+                    <div class="api-title">User Submits Form</div>
+                    <div class="api-detail">Destination: Goa<br>Duration: 5 days<br>Budget: moderate</div>
+                </div>
+                <div class="api-step">
+                    <div class="api-number">2</div>
+                    <div class="api-title">Express Backend</div>
+                    <div class="api-detail">Calls ML API (:5000) for real place recommendations</div>
+                </div>
+                <div class="api-step">
+                    <div class="api-number">3</div>
+                    <div class="api-title">ML Model Returns</div>
+                    <div class="api-detail">Hotels: Taj, Marriott<br>Restaurants: Fisherman's<br>Attractions: Baga Beach</div>
+                </div>
+                <div class="api-step">
+                    <div class="api-number">4</div>
+                    <div class="api-title">Gemini AI</div>
+                    <div class="api-detail">Receives ML data + generates full day-by-day itinerary</div>
+                </div>
+                <div class="api-step">
+                    <div class="api-number">5</div>
+                    <div class="api-title">User Sees</div>
+                    <div class="api-detail">Complete itinerary<br>+ Hotel/Restaurant recommendations<br>+ PDF export</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="section">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-item"><span class="check">✓</span> AI Itinerary Generation</div>
+                <div class="feature-item"><span class="check">✓</span> Real Hotel Recommendations</div>
+                <div class="feature-item"><span class="check">✓</span> Restaurant Suggestions</div>
+                <div class="feature-item"><span class="check">✓</span> Top Attractions</div>
+                <div class="feature-item"><span class="check">✓</span> Google OAuth Login</div>
+                <div class="feature-item"><span class="check">✓</span> Email/Password Auth</div>
+                <div class="feature-item"><span class="check">✓</span> Trip History</div>
+                <div class="feature-item"><span class="check">✓</span> Favorites</div>
+                <div class="feature-item"><span class="check">✓</span> PDF Export</div>
+                <div class="feature-item"><span class="check">✓</span> Copy to Clipboard</div>
+                <div class="feature-item"><span class="check">✓</span> Dark/Light Mode</div>
+                <div class="feature-item"><span class="check">✓</span> Weather Widget</div>
+                <div class="feature-item"><span class="check">✓</span> Cost Estimator</div>
+                <div class="feature-item"><span class="check">✓</span> User Ratings 1-5 Stars</div>
+                <div class="feature-item"><span class="check">✓</span> PWA Support</div>
+                <div class="feature-item"><span class="check">✓</span> Responsive Design</div>
+            </div>
+        </section>
+
+        <!-- Statistics -->
+        <section class="section">
+            <h2 class="section-title">Project Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">37+</div>
+                    <div class="stat-label">Source Files</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">6K+</div>
+                    <div class="stat-label">Lines of Code</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1M+</div>
+                    <div class="stat-label">Data Records</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">16</div>
+                    <div class="stat-label">React Components</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">API Endpoints</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Security Layers</div>
+                </div>
+            </div>
+        </section>
+
+        <!--Footer -->
+        <footer>
+            <p>AI Trip Planner · Vignan University · B.Tech CSE Data Science · Final Year Project</p>
+            <p>Built with ❤️ using React, Express, Flask, XGBoost & Gemini AI</p>
+        </footer>
+    </div>
+</body>
+</html>

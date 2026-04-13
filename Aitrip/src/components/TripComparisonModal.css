@@ -1,0 +1,56 @@
+/* ── Trip Comparison ─────────────────────────────────────────────── */
+.tcmp-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+}
+.tcmp-modal {
+  width: 100%; max-width: 900px; max-height: 90vh;
+  background: #1C1C1A; border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px; display: flex; flex-direction: column; overflow: hidden;
+  box-shadow: 0 32px 64px rgba(0,0,0,0.6);
+  animation: tcmp-in 0.3s cubic-bezier(0.34,1.2,0.64,1);
+}
+@keyframes tcmp-in { from{opacity:0;transform:scale(0.96) translateY(12px)} to{opacity:1;transform:none} }
+
+.tcmp-header {
+  display:flex; align-items:flex-start; justify-content:space-between;
+  padding:1.4rem 1.6rem 0.8rem; border-bottom:1px solid rgba(255,255,255,0.07);
+}
+.tcmp-title { display:flex; gap:0.8rem; align-items:flex-start; }
+.tcmp-title h2 { font-size:1.15rem; font-weight:700; color:#F5F2EC; margin:0; }
+.tcmp-title p { font-size:0.75rem; color:rgba(245,242,236,0.4); margin:0.2rem 0 0; }
+.tcmp-close { background:none;border:none;color:rgba(245,242,236,0.5);font-size:1.8rem;cursor:pointer; }
+.tcmp-close:hover { color:#fff; }
+
+.tcmp-body { padding: 1.6rem; overflow-y: auto; display:flex; flex-direction:column; gap:1.5rem; }
+.tcmp-selectors { display:grid; grid-template-columns:1fr 40px 1fr; gap:1rem; align-items:center; }
+.tcmp-vs { text-align:center; font-weight:800; color:#C9A84C; font-size:0.9rem; }
+.tcmp-selectors select {
+  background: rgba(255,255,255,0.05); color: #F5F2EC; border: 1px solid rgba(255,255,255,0.1);
+  padding: 0.6rem 1rem; border-radius: 10px; font-family: 'DM Sans', sans-serif;
+  cursor: pointer; outline: none; width: 100%;
+}
+.tcmp-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+.tcmp-col {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px; padding: 1.2rem;
+}
+.tcmp-col h3 { font-size: 1.2rem; font-family:'Playfair Display',serif; color:#C9A84C; margin:0 0 1rem; }
+.tcmp-stat { display:flex; justify-content:space-between; padding:0.6rem 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:0.84rem; color:rgba(245,242,236,0.7); }
+.tcmp-stat strong { color:#F5F2EC; }
+.tcmp-plan { margin-top:1rem; }
+.tcmp-plan h4 { font-size:0.7rem; text-transform:uppercase; color:rgba(245,242,236,0.4); margin-bottom:0.5rem; }
+.tcmp-plan p { font-size:0.8rem; color:rgba(245,242,236,0.8); line-height:1.5; white-space: pre-wrap; opacity: 0.8;}
+
+.tcmp-loading, .tcmp-empty { text-align:center; padding:3rem; color:rgba(245,242,236,0.5); }
+
+.light-mode .tcmp-modal { background:#F5F2EC; border-color:rgba(0,0,0,0.1); }
+.light-mode .tcmp-title h2 { color:#111110; }
+.light-mode .tcmp-selectors select { background:#fff; color:#111110; border-color:rgba(0,0,0,0.1); }
+.light-mode .tcmp-col { background:#fff; border-color:rgba(0,0,0,0.08); }
+.light-mode .tcmp-col h3 { color:#C9A84C; }
+.light-mode .tcmp-stat { border-color:rgba(0,0,0,0.05); color:#6A6A68; }
+.light-mode .tcmp-stat strong { color:#111110; }
+.light-mode .tcmp-plan h4 { color:#8A8880; }
+.light-mode .tcmp-plan p { color:#4A4A48; }

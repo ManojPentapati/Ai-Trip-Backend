@@ -1,0 +1,160 @@
+/* ── Weather Widget ─────────────────────────────────────────────────── */
+.ww-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+.ww-loading, .ww-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 3rem;
+  color: rgba(245,242,236,0.5);
+  text-align: center;
+}
+.ww-error span { font-size: 2.5rem; }
+.ww-error p { font-size: 0.88rem; line-height: 1.6; }
+.ww-spinner {
+  width: 32px; height: 32px;
+  border: 3px solid rgba(201,168,76,0.15);
+  border-top-color: #C9A84C;
+  border-radius: 50%;
+  animation: ww-spin 0.8s linear infinite;
+}
+@keyframes ww-spin { to { transform: rotate(360deg); } }
+
+/* Current card */
+.ww-current {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03));
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 16px;
+  padding: 1.4rem 1.6rem;
+  flex-wrap: wrap;
+}
+
+.ww-current-left {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.ww-icon { font-size: 3rem; line-height: 1; }
+
+.ww-temp {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #F5F2EC;
+  line-height: 1;
+  font-family: 'Playfair Display', serif;
+}
+
+.ww-desc {
+  font-size: 0.9rem;
+  color: rgba(245,242,236,0.65);
+  margin: 0.2rem 0;
+  text-transform: capitalize;
+}
+
+.ww-location {
+  font-size: 0.78rem;
+  color: #C9A84C;
+  font-weight: 500;
+}
+
+.ww-current-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.ww-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px;
+  padding: 0.5rem 0.8rem;
+}
+.ww-stat span { font-size: 1rem; }
+.ww-stat div { display: flex; flex-direction: column; }
+.ww-stat small { font-size: 0.68rem; color: rgba(245,242,236,0.4); }
+.ww-stat strong { font-size: 0.88rem; color: #F5F2EC; font-weight: 600; }
+
+/* Astronomy bar */
+.ww-astro {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 0.7rem 1rem;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.8rem;
+  color: rgba(245,242,236,0.6);
+}
+
+/* Forecast */
+.ww-forecast-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(245,242,236,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0 0.2rem;
+}
+
+.ww-forecast {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+}
+
+.ww-day {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+}
+.ww-day:hover { background: rgba(201,168,76,0.06); border-color: rgba(201,168,76,0.2); }
+
+.ww-day-name { font-size: 0.78rem; font-weight: 700; color: #C9A84C; }
+.ww-day-icon { font-size: 1.6rem; }
+.ww-day-desc { font-size: 0.68rem; color: rgba(245,242,236,0.5); line-height: 1.3; }
+.ww-day-temps { display: flex; gap: 0.5rem; align-items: center; }
+.ww-max { font-size: 0.88rem; font-weight: 700; color: #F5F2EC; }
+.ww-min { font-size: 0.78rem; color: rgba(245,242,236,0.4); }
+.ww-day-rain { font-size: 0.72rem; color: rgba(100,160,255,0.75); }
+
+.ww-note {
+  font-size: 0.7rem;
+  color: rgba(245,242,236,0.3);
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+/* Light mode */
+.light-mode .ww-current { background: rgba(201,168,76,0.06); border-color: rgba(201,168,76,0.2); }
+.light-mode .ww-temp { color: #111110; }
+.light-mode .ww-desc { color: #4A4A48; }
+.light-mode .ww-stat { background: rgba(0,0,0,0.04); }
+.light-mode .ww-stat small { color: #8A8880; }
+.light-mode .ww-stat strong { color: #111110; }
+.light-mode .ww-astro { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.08); color: #4A4A48; }
+.light-mode .ww-day { background: #fff; border-color: rgba(0,0,0,0.08); }
+.light-mode .ww-day-desc { color: #6A6A68; }
+.light-mode .ww-max { color: #111110; }
+.light-mode .ww-min { color: #8A8880; }

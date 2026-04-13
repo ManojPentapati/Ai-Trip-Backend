@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ML Models
+*.pkl
+*.joblib
+*.h5
+*.pth
+
+# Logs
+logs/
+
+# Python virtual environment
+venv/
+env/
+
+# Notebook outputs
+.ipynb_checkpoints/
