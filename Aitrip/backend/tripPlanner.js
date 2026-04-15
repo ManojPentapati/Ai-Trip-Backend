@@ -46,8 +46,9 @@ export const generateTripPlan = async (req, res) => {
     let mlRecommendations = null;
 
     try {
+      const mlApiUrl = process.env.ML_API_URL || 'http://localhost:5000';
       const mlResponse = await axios.post(
-        'http://localhost:5000/predict-trip-satisfaction',
+        `${mlApiUrl}/predict-trip-satisfaction`,
         { destination, duration: parseInt(duration), budget, companions, country },
         { timeout: 5000 }
       );

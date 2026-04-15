@@ -55,7 +55,8 @@ app.get('/health', async (req, res) => {
   let mlStatus = 'unknown'; let mlLatency = null;
   try {
     const start = Date.now();
-    await axios.get('http://localhost:5000/health', { timeout: 3000 });
+    const mlApiUrl = process.env.ML_API_URL || 'http://localhost:5000';
+    await axios.get(`${mlApiUrl}/health`, { timeout: 3000 });
     mlLatency = Date.now() - start; mlStatus = 'healthy';
   } catch { mlStatus = 'unavailable'; }
   const status = {
