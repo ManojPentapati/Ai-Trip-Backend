@@ -89,7 +89,7 @@ const TripPlannerModal = ({ isOpen, onClose, onSubmit, defaultBudget = 'moderate
     setIsLoading(true);
     setError(null);
     try {
-      const response = await axios.post('http://localhost:3001/api/generate-trip', {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL || 'https://ai-trip-backend-1-eiwk.onrender.com'}/api/generate-trip`, {
         ...formData,
         budget: getEffectiveBudget(),
         interests,

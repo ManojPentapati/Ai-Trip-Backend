@@ -72,7 +72,7 @@ const Dashboard = ({ user, onLogout }) => {
       const { data: { session } } = await supabase.auth.getSession();
       const token = session?.access_token;
       if (!token) return;
-      const response = await fetch('http://localhost:3001/api/save-trip', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://ai-trip-backend-1-eiwk.onrender.com'}/api/save-trip`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({
@@ -126,7 +126,7 @@ const Dashboard = ({ user, onLogout }) => {
     // If no ML data saved (old trip), fetch it fresh from ML API
     if (!mlPrediction || !mlRecommendations) {
       try {
-        const mlResponse = await fetch('http://localhost:5000/predict-trip-satisfaction', {
+        const mlResponse = await fetch(`${import.meta.env.VITE_ML_API_URL || 'https://ai-trip-backend-lari.onrender.com'}/predict-trip-satisfaction`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -162,7 +162,7 @@ const Dashboard = ({ user, onLogout }) => {
       const { data: { session } } = await supabase.auth.getSession();
       const token = session?.access_token;
       if (!token) return;
-      const response = await fetch('http://localhost:3001/api/dashboard-stats', { headers: { 'Authorization': `Bearer ${token}` } });
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://ai-trip-backend-1-eiwk.onrender.com'}/api/dashboard-stats`, { headers: { 'Authorization': `Bearer ${token}` } });
       const result = await response.json();
       if (result.success) setDashboardStats(result.data);
     } catch (error) { console.error('Error fetching stats:', error); }
@@ -174,7 +174,7 @@ const Dashboard = ({ user, onLogout }) => {
       const { data: { session } } = await supabase.auth.getSession();
       const token = session?.access_token;
       if (!token) return;
-      const response = await fetch('http://localhost:3001/api/recent-trips', { headers: { 'Authorization': `Bearer ${token}` } });
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://ai-trip-backend-1-eiwk.onrender.com'}/api/recent-trips`, { headers: { 'Authorization': `Bearer ${token}` } });
       const result = await response.json();
       if (result.success) setRecentTrips(result.data);
     } catch (error) { console.error('Error fetching recent trips:', error); }
@@ -186,7 +186,7 @@ const Dashboard = ({ user, onLogout }) => {
       const { data: { session } } = await supabase.auth.getSession();
       const token = session?.access_token;
       if (!token) return;
-      const response = await fetch('http://localhost:3001/api/favorite-trips', { headers: { 'Authorization': `Bearer ${token}` } });
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://ai-trip-backend-1-eiwk.onrender.com'}/api/favorite-trips`, { headers: { 'Authorization': `Bearer ${token}` } });
       const result = await response.json();
       if (result.success) setFavoriteTrips(result.data);
     } catch (error) { console.error('Error fetching favorites:', error); }
@@ -199,7 +199,7 @@ const Dashboard = ({ user, onLogout }) => {
       const token = session?.access_token;
       if (!token) return;
       const method = isFavorite ? 'DELETE' : 'POST';
-      const response = await fetch(`http://localhost:3001/api/trip-history/${tripId}/favorite`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://ai-trip-backend-1-eiwk.onrender.com'}/api/trip-history/${tripId}/favorite`, {
         method, headers: { 'Authorization': `Bearer ${token}` }
       });
       const result = await response.json();

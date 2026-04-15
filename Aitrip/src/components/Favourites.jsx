@@ -20,7 +20,7 @@ const Favourites = ({ userId, onClose, onViewTrip }) => {
       const token = session?.access_token;
       if (!token) throw new Error('No active session');
 
-      const response = await fetch('http://localhost:3001/api/trip-history', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://ai-trip-backend-1-eiwk.onrender.com'}/api/trip-history`, {
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
       });
 

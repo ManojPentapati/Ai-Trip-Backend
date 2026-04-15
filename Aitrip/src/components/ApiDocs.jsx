@@ -12,7 +12,7 @@ const ENDPOINTS = [
   {
     method: 'POST',
     path: '/predict',
-    url: 'http://localhost:5000/predict',
+    url: import.meta.env.VITE_ML_API_URL || 'https://ai-trip-backend-lari.onrender.com/predict',
     desc: 'Python ML Flask sub-API. Predicts user satisfaction out of 10 based on XGBoost model for Indian tourism.',
     body: '{\n  "Destination": "Goa",\n  "Budget": "moderate",\n  "Duration (Days)": 3,\n  "Accommodation Type": "Resort",\n  ... \n}',
     response: '{\n  "ml_score": 8.7,\n  "recommendations": { "tips": ["Carry sunscreen"] }\n}'

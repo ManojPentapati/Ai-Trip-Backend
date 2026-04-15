@@ -308,7 +308,7 @@ const TripResultsWindow = ({
     try {
       const { supabase } = await import('../supabaseClient');
       const { data: { session } } = await supabase.auth.getSession();
-      const res = await fetch(`http://localhost:3001/api/trip-history/${tripId}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://ai-trip-backend-1-eiwk.onrender.com'}/api/trip-history/${tripId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${session?.access_token}` }
       });

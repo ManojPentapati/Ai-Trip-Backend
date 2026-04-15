@@ -37,7 +37,7 @@ const Profile = ({ user, onClose, onProfileUpdate }) => {
       const { data: { session } } = await supabase.auth.getSession();
       const token = session?.access_token;
       if (!token) return;
-      const res = await fetch('http://localhost:3001/api/dashboard-stats', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'https://ai-trip-backend-1-eiwk.onrender.com'}/api/dashboard-stats`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const result = await res.json();

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = 'http://localhost:3001/api';
+const API_BASE = `${import.meta.env.VITE_API_URL || 'https://ai-trip-backend-1-eiwk.onrender.com'}/api`;
 
 export const generateShareLink = async (tripId) => {
   try {
