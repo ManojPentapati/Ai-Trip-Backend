@@ -65,6 +65,8 @@ const TripPlannerModal = ({ isOpen, onClose, onSubmit, defaultBudget = 'moderate
     '🍽️ Sourcing dining spots...',
     '💡 Adding local tips...',
     '✨ Finalising your trip plan...',
+    '⏳ Waking up the AI Engine... this might take up to 50 seconds on the free tier!',
+    '⏳ Please hold on, the servers are booting up just for you...',
   ];
 
   React.useEffect(() => {
@@ -72,8 +74,15 @@ const TripPlannerModal = ({ isOpen, onClose, onSubmit, defaultBudget = 'moderate
     if (isLoading) {
       setLoadingStep(0);
       interval = setInterval(() => {
-        setLoadingStep(s => (s + 1) % loadingSteps.length);
-      }, 2500);
+        setLoadingStep(s => {
+          // If the AI takes longer than 15 seconds, bounce between the final 'Cold Start' warnings
+          // instead of looping back to "Analysing preferences" so the user knows exactly why it's taking so long.
+          if (s >= loadingSteps.length - 2) {
+             return s === loadingSteps.length - 2 ? loadingSteps.length - 1 : loadingSteps.length - 2;
+          }
+          return s + 1;
+        });
+      }, 3500); // Increased step duration to 3.5s for a smoother pacing
     }
     return () => clearInterval(interval);
   }, [isLoading]);
