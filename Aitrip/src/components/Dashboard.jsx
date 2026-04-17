@@ -592,6 +592,7 @@ const Dashboard = ({ user, onLogout }) => {
               { icon: '🗺️', title: 'Plan New Trip', desc: 'Generate a full AI itinerary', action: () => setShowTripPlanner(true), gold: true },
               { icon: '🕒', title: 'Trip History', desc: 'Browse all your past plans', action: () => setShowTripHistory(true) },
               { icon: '⭐', title: 'Favourites', desc: 'View your saved favourites', action: () => setActiveTab('favorite') },
+              { icon: '🚀', title: 'Restart Tour', desc: 'View the interactive app tour again', action: () => { localStorage.removeItem('onboarding_done'); window.location.reload(); } },
               { icon: '📊', title: 'Destinations', desc: `${dashboardStats.destinations} unique places explored`, action: null },
             ].map((item, i) => (
               <button key={i} className={`db-quick-card ${item.gold ? 'gold' : ''}`} onClick={item.action || undefined} disabled={!item.action}>
